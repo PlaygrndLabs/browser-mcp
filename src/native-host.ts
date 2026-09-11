@@ -81,11 +81,16 @@ server.listen(socketPath, () => {
   log(`Listening on ${socketPath}`);
 });
 
-function shutdown(): void {
+let shuttingDown = false;
+async function shutdown(exitAfterCleanup: boolean): Promise<void> {
+  if (shuttingDown) return;
+  shuttingDown = true;
   for (const client of new Set(pending.values())) client.destroy();
-  server.close(() => void rm(socketPath, { force: true }));
+  await new Promise<void>((resolve) => server.close(() => resolve()));
+  await rm(socketPath, { force: true });
+  if (exitAfterCleanup) process.exit(0);
 }
 
-process.stdin.on("end", shutdown);
-process.on("SIGTERM", shutdown);
-process.on("SIGINT", shutdown);
+process.stdin.on("end", () => void shutdown(false));
+process.on("SIGTERM", () => void shutdown(true));
+process.on("SIGINT", () => void shutdown(true));
