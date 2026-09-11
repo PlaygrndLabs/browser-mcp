@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Browser MCP</title>
+    <style>
+      :root { color-scheme: light dark; font: 13px/1.45 system-ui, sans-serif; }
+      body { width: 280px; margin: 0; padding: 16px; }
+      h1 { font-size: 15px; margin: 0 0 10px; }
+      p { margin: 8px 0 0; color: #777; }
+      .status { display: flex; align-items: center; gap: 8px; }
+      .dot { width: 9px; height: 9px; border-radius: 50%; background: #d93f3f; }
+      .connected .dot { background: #2da44e; }
+      code { font-size: 11px; }
+    </style>
+  </head>
+  <body>
+    <h1>Browser MCP</h1>
+    <div id="status" class="status"><span class="dot"></span><span>Checking native host…</span></div>
+    <p>Runs locally. It does not use the mouse, keyboard, or page automation.</p>
+    <script src="dist/popup.js"></script>
+  </body>
+</html>

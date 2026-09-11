@@ -1,0 +1,31 @@
+{
+  "name": "@playgrndlabs/browser-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Control Chrome browser state through MCP without UI automation.",
+  "scripts": {
+    "build": "bun run scripts/build.ts",
+    "build:watch": "bun build ./src/extension/service-worker.ts ./src/extension/popup.ts --outdir ./extension/dist --target browser --format esm --sourcemap=linked --watch",
+    "check": "bun run typecheck && bun test",
+    "typecheck": "NODE_OPTIONS=--max-old-space-size=4096 tsc --noEmit",
+    "test": "bun test",
+    "register-host": "bun run scripts/register-native-host.ts",
+    "print-mcp-config": "bun run scripts/print-mcp-config.ts",
+    "mcp": "bun run src/mcp-server.ts",
+    "native-host": "bun run src/native-host.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.18.2",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.22",
+    "@types/chrome": "^0.1.1",
+    "typescript": "^5.9.2"
+  },
+  "engines": {
+    "bun": ">=1.2.0"
+  },
+  "license": "MIT"
+}

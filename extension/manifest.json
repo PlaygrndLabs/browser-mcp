@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Browser MCP",
+  "description": "Let local MCP clients control Chrome's browser-level state without UI automation.",
+  "version": "0.1.0",
+  "minimum_chrome_version": "105",
+  "permissions": ["nativeMessaging", "tabs", "tabGroups"],
+  "background": {
+    "service_worker": "dist/service-worker.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "Browser MCP",
+    "default_popup": "popup.html"
+  }
+}
